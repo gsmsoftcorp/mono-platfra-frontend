@@ -1,0 +1,34 @@
+/* PC (해상도 1024px)*/
+@media all and (min-width:1024px) {
+
+}
+
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width:768px) and (max-width:1023px) {
+  .schBox input { position: relative; left: 400px; }
+
+}
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width:767px) {
+  .schBox input { display: none; }
+
+}
+
+
+/* header 디자인 */
+.head { display: table; width: 100%; height: 68px; padding: 0 24px; position: fixed; z-index: 100; background-color: #ffffff; box-shadow: 0 0 5px rgba(194, 200, 219, 0.6); }
+.head > div { display: table-cell; vertical-align: middle; }
+/* 로고 */
+.logo > a { display: block; width: 100px; height: 33px; background-color: yellow; text-indent: -9999px; }
+/* 검색 */
+.head ul > li { display: inline-block; vertical-align: middle; margin-left: 16px; }
+.schBox input { width: 400px; height: 44px; border: 1px solid #D4DAEA; border-radius: 16px; }
+.schBox button { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); }
+/* 계정, 버튼 */
+.menu { display: inline-block; vertical-align: middle; }
+
+.accounts > span { display: inline-block; vertical-align: middle; margin: 0 4px; }
+.btnMakeBoard { height: 44px; line-height: 42px; padding: 0 12px; border-radius: 24px; }
+
+.profileBox img { width: 40px; height: 40px; border: 1px solid #D4DAEA; }

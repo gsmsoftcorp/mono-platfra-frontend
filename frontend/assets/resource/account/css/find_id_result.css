@@ -1,0 +1,8 @@
+@charset "utf-8";
+.accountBox { text-align: center; }
+.tabCont { margin-top: 40px; }
+.result { font-size: 16px; }
+.addResult { margin-top: 4px; color: #9da4b7; }
+.noResultBox .addResult { text-decoration: underline; }
+.btnSize4 { width: 200px; margin-top: 40px; }
+
