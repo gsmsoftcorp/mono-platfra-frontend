@@ -1,0 +1,6 @@
+.profile_img_box { display: inline-block; position: relative; }
+.account_box .profile_img_box { width: 80px; height: 80px; }
+.profile_img_box + span { margin-left: 12px; }
+.input_form { margin-top: 20px; }
+.info_box > .input_box { margin-right: 8px; flex: 1 1 auto; }
+.info_box > button { flex: 0 1 auto; }
