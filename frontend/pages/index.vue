@@ -3,7 +3,7 @@
     <div>
       <Logo />
       <h1 class="title">
-        메인
+        메인2222
       </h1>
       <div class="links">
         <nuxt-link :to="{ name: 'account-login', params: { }}" class="button--green">
