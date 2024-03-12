@@ -1,8 +1,0 @@
-.account_box h2 { margin-bottom: 16px; }
-.find_way_box { margin: 40px 0 28px 0; text-align: center; }
-.find_way_box input[type=radio]+label { font-size: 1rem; }
-.verify_box .input_box { flex: 1 1 auto; margin-right: 10px; }
-.verify_box button { flex: 0 0 auto; overflow: hidden; }
-.find_tab {  background: #F4F6FA; border-radius: 12px; height: 50px; margin: 20px 0; padding: 8px; }
-.find_tab > .selected { background: #fff; border-radius: 10px;   }
-.find_tab > a { text-align: center; }

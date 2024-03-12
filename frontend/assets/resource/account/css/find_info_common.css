@@ -1,7 +1,0 @@
-h2 + p { text-align: center; margin: 40px 0; }
-.input_form { padding-bottom: 8px; }
-.input_form > div { margin-bottom: 12px; }
-.btn_box > button { flex: 1 1 auto; }
-.btn_box > button:first-child { margin-right: 4px; }
-.btn_box > button:last-child { margin-left: 4px; }
-.result > strong { font-size: 1rem; text-decoration: underline; }
