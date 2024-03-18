@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+  /** @type {import('tailwindcss').Config} */
+  import defaultTheme from 'tailwindcss/defaultTheme';
+
+  export default {
   content: [],
   darkMode: 'class',
   safelist: [
@@ -35,6 +37,9 @@ export default {
           800: "#162d40",
           900: "#15202b",
         },
+      },
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
   },
