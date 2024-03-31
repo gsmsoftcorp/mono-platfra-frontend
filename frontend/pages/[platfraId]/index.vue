@@ -1,6 +1,6 @@
 <template>
   <div>
-    <service-platfra-page-main/>
+    <service-platfra-page-home/>
   </div>
 </template>
 <script setup lang="ts">

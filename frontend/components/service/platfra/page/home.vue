@@ -36,9 +36,14 @@
             <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>
         </select>
     </div>
-    <div class="hidden sm:block">
+    <div class="p-10 hidden sm:block text-center">
         <div class="border-b border-gray-200">
             <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                <a v-for="tab in tabs" :key="tab.name" href="#" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700', 'flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium']" :aria-current="tab.current ? 'page' : undefined">
+                    {{ tab.name }}
+                    <span v-if="tab.count" :class="[tab.current ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-900', 'ml-3 hidden rounded-full py-0.5 px-2.5 text-xs font-medium md:inline-block']">{{ tab.count }}</span>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a v-for="tab in tabs" :key="tab.name" href="#" :class="[tab.current ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700', 'flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium']" :aria-current="tab.current ? 'page' : undefined">
                     {{ tab.name }}
                     <span v-if="tab.count" :class="[tab.current ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-900', 'ml-3 hidden rounded-full py-0.5 px-2.5 text-xs font-medium md:inline-block']">{{ tab.count }}</span>
@@ -49,22 +54,9 @@
 
     <!-- Separator -->
     <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
-    <ul role="list" class="p-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <li v-for="person in people" :key="person.email" class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-left shadow">
-            <div class="flex flex-1 flex-col">
-                <img class="mx-auto flex-shrink-0" :src="person.imageUrl" alt="" />
-                <h3 class="ml-3 mt-3 text-sm font-medium text-gray-900">{{ person.name }}</h3>
-                <dl class="m-3 flex flex-grow flex-col justify-between">
-                    <dt class="sr-only">Title</dt>
-                    <dd class="text-sm text-gray-500">{{ person.title }}</dd>
-                    <dt class="sr-only">Role</dt>
-                    <dd class="mt-3">
-                        <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ person.role }}</span>
-                    </dd>
-                </dl>
-            </div>
-        </li>
-    </ul>
+
+    <service-platfra-page-list/>
+
 
 </template>
 <script setup lang="ts">
@@ -96,82 +88,6 @@ const tabs = [
     { name: 'Disqualified', href: '#', current: false },
 ]
 
-
-const people = [
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-            'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    },
-    // More people...
-]
 </script>
 
 
