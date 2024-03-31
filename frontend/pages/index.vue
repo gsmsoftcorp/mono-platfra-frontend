@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <service-platfra-dashboard/>
-  </div>
+    <div>
+        <!-- Your content -->
+        <service-main-dashboard/>
+    </div>
 </template>
 <script setup lang="ts">
 
