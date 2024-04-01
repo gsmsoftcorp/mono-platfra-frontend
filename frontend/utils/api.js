@@ -1,8 +1,11 @@
-// api.js
+import { useRuntimeConfig } from '#imports';
 /**
  * 범용 API 요청 함수
  */
-async function callApi(method, url, body = null, headers = {}) {
+async function callApi(method, endpoint, body = null, headers = {}) {
+    const { public: { apiBaseUrl } } = useRuntimeConfig();
+    const formattedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const url = `${apiBaseUrl}${formattedEndpoint}`;
     const config = {
         method,
         headers: {
@@ -17,7 +20,10 @@ async function callApi(method, url, body = null, headers = {}) {
 
     try {
         const response = await fetch(url, config);
-        const data = await response.json();
+        // 응답 본문이 존재하는지 확인
+        const text = await response.text(); // 먼저 텍스트로 응답을 읽음
+        const data = text ? JSON.parse(text) : {}; // 텍스트가 비어있지 않으면 JSON으로 파싱, 그렇지 않으면 빈 객체 반환
+
         if (!response.ok) {
             throw new Error(data.message || 'Something went wrong');
         }
@@ -26,6 +32,7 @@ async function callApi(method, url, body = null, headers = {}) {
         throw error;
     }
 }
+
 
 /**
  * 객체를 쿼리 스트링으로 변환하는 함수
@@ -42,7 +49,7 @@ function objectToQueryString(obj) {
 export async function get(url, body = {}, headers = {}) {
     const queryString = objectToQueryString(body);
     const urlWithQuery = queryString ? `${url}?${queryString}` : url;
-    return await callApi('GET', urlWithQuery, null, headers);
+    return await callApi('GET', urlWithQuery, body, headers);
 }
 
 /**
