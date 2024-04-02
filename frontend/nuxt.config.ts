@@ -33,10 +33,35 @@ export default defineNuxtConfig({
     build: {
         transpile: ['@heroicons/vue']
     },
+    nitro: {
+        // routeRules: {
+        //     '/api/**': {
+        //         proxy: 'http://localhost:8080/api/**',
+        //     },
+        // },
+        routeRules: {
+            '/api/**': { proxy: 'http://localhost:8080/api/**', cors: true, ssr: true },
+            // '/blog/**': { swr: true },
+            // '/blog/**': { swr: 600 },
+            // '/blog/**': { static: true },
+            // '/blog/**': { cache: { /* cache options*/ } },
+            // '/assets/**': { headers: { 'cache-control': 's-maxage=0' } },
+            // '/api/v1/**': { cors: true, headers: { 'access-control-allow-methods': 'GET' } },
+            // '/old-page': { redirect: '/new-page' }, // uses status code 307 (Temporary Redirect)
+            // '/old-page2': { redirect: { to:'/new-page2', statusCode: 301 } },
+            // '/old-page/**': { redirect: '/new-page/**' },
+            // '/proxy/example': { proxy: 'https://example.com' },
+            // '/proxy/**': { proxy: '/api/**' },
+        }
+
+    },
     // API 호출 기본 URL을 환경 변수에 따라 설정
     runtimeConfig: {
         public: {
             apiBaseUrl: process.env.API_BASE_URL // 환경별로 다른 API 기본 URL 사용
         }
     },
+    tailwindcss: {
+        viewer: false
+    }
 })

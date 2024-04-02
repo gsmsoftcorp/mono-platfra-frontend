@@ -18,15 +18,15 @@
 </template>
 <script setup lang="ts">
 
-import {get} from '~/utils/api';
-
+// import {get} from '~/composables/api';
+//
 const contentList = ref();
-const params = {};
-
-get('/platfra/content', params).then(data => {
-    contentList.value = data;
-    console.log('data : ', data);
-});
+// const params = {};
+//
+// get('/platfra/content', params).then(data => {
+//     contentList.value = data;
+//     console.log('data : ', data);
+// });
 
 
 // const contentList = [
