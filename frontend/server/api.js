@@ -1,3 +1,4 @@
+// import { useRuntimeConfig } from '#app';
 /**
  * 객체를 쿼리 스트링으로 변환하는 함수
  */
@@ -12,10 +13,12 @@ async function objectToQueryString(obj) {
  */
 async function useApiRequest(method, url, params = {}, headers = {}) {
     // GET 요청의 경우 URL에 쿼리 스트링 추가
-    let endpoint = '/api' + url;
+    // const config = useRuntimeConfig();
+    // let endpoint = `${config.public.apiBaseUrl}/api${url}`;
+    let endpoint = url.startsWith('/api') ? url : `/api${url.startsWith('/') ? '' : '/'}${url}`;
     if (method === 'GET' && Object.keys(params).length) {
         const queryString = await objectToQueryString(params);
-        endpoint = `${url}?${queryString}`;
+        endpoint = `${endpoint}?${queryString}`;
     }
     console.log('endpoint : ', endpoint);
     // useFetch 사용

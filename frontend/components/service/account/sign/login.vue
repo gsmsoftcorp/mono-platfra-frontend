@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 
-import {useApiGet, useApiPost, useApiPut, useApiDelete} from "~/composables/api";
+import {useApiGet, useApiPost, useApiPut, useApiDelete} from "~/server/api";
 
 const userId = ref();
 const password = ref();
@@ -71,7 +71,7 @@ async function login(userId: string, password: string) {
         userId: userId,
         password: password
     }
-    const { data: postData, error: postError } = useApiPost(url, params);
+    const postData = useApiPost(url, params);
 
     console.log('postData : ', postData);
     // // GET 요청 예시
