@@ -1,50 +1,50 @@
-  /** @type {import('tailwindcss').Config} */
-  import defaultTheme from 'tailwindcss/defaultTheme';
+/** @type {import('tailwindcss').Config} */
+import defaultTheme from 'tailwindcss/defaultTheme';
 
-  export default {
-  content: [],
-  darkMode: 'class',
-  safelist: [
-    {
-      pattern: /text-(red|green|blue)-(100|400)/,
-      variants: ['group-hover']
-    },
-    {
-      pattern: /bg-(red|green|blue)-(100|400)/,
-      variants: ['group-hover']
-    }
-  ],
-
-  theme: {
-    screens: {
-      xs: "614px",
-      sm: "1002px",
-      md: "1022px",
-      lg: "1092px",
-      xl: "1280px",
-    },
-    extend: {
-      colors: {
-        dim: {
-          50: "#5F99F7",
-          100: "#5F99F7",
-          200: "#38444d",
-          300: "#202e3a",
-          400: "#253341",
-          500: "#5F99F7",
-          600: "#5F99F7",
-          700: "#192734",
-          800: "#162d40",
-          900: "#15202b",
+module.exports = {
+    content: [],
+    darkMode: 'class',
+    safelist: [
+        {
+            pattern: /text-(red|green|blue)-(100|400)/,
+            variants: ['group-hover']
         },
-      },
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
-    },
-  },
+        {
+            pattern: /bg-(red|green|blue)-(100|400)/,
+            variants: ['group-hover']
+        }
+    ],
 
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
+    theme: {
+        screens: {
+            xs: "614px",
+            sm: "1002px",
+            md: "1022px",
+            lg: "1092px",
+            xl: "1280px",
+        },
+        extend: {
+            colors: {
+                dim: {
+                    50: "#5F99F7",
+                    100: "#5F99F7",
+                    200: "#38444d",
+                    300: "#202e3a",
+                    400: "#253341",
+                    500: "#5F99F7",
+                    600: "#5F99F7",
+                    700: "#192734",
+                    800: "#162d40",
+                    900: "#15202b",
+                },
+            },
+            fontFamily: {
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+
+    plugins: [
+        require('@tailwindcss/forms')
+    ],
 }

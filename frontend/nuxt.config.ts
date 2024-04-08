@@ -31,6 +31,9 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
     ],
+    plugins: [
+        '~/plugins/dark-mode.client.js' // 클라이언트 사이드 플러그인 등록
+    ],
     build: {
         transpile: ['@heroicons/vue']
     },
