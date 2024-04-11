@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 
-import {useApiGet, useApiPost, useApiPut, useApiDelete} from "~/server/api";
 
 const userId = ref();
 const password = ref();
@@ -71,9 +70,11 @@ async function login(userId: string, password: string) {
         userId: userId,
         password: password
     }
-    const postData = useApiPost(url, params);
 
-    console.log('postData : ', postData);
+    await useApiPost(url, params).then(async (result) => {
+        await useAccessToken().setToken(result.data); // TODO 쿠키 저장 구현
+    });
+
     // // GET 요청 예시
     // const { data: getData, error: getError } = useApiGet('https://api.example.com/items', { params: { userId: 'user1' } });
     // // POST 요청 예시
@@ -84,6 +85,10 @@ async function login(userId: string, password: string) {
     // const { data: deleteData, error: deleteError } = useApiDelete('https://api.example.com/items/1');
 }
 
+const logout = () => {
+    localStorage.removeItem('accessToken');
+    // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
+};
 
 </script>
 

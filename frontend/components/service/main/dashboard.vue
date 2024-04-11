@@ -1,26 +1,4 @@
-<!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-    <!--
-      This example requires updating your template:
-
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    -->
     <div>
         <TransitionRoot as="template" :show="sidebarOpen">
             <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">
@@ -226,4 +204,10 @@ const userNavigation = [
 ]
 
 const sidebarOpen = ref(false)
+
+const logout = () => {
+    localStorage.removeItem('accessToken');
+    // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
+};
+
 </script>
