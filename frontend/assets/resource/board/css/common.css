@@ -1,7 +1,0 @@
-﻿.file_list > li { display: inline-block; margin: 2px 0; padding: 8px 12px; vertical-align: middle; background-color: #fff; border: 1px solid rgba(225, 231, 243, 0.6); border-radius: 10px; }
-.file_info { margin-right: 20px; }
-.form_btn_box { text-align: right; }
-@media (max-width: 767px){
-  .file_list > li { width: 100%; }
-  .file_list > li > .flex_box { justify-content: space-between; }
-}

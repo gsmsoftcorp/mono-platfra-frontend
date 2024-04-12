@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!-- Your content -->
-        <service-main-dashboard/>
+        <service-account-sign-login/>
     </div>
 </template>
 <script setup lang="ts">
