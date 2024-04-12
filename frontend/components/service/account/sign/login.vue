@@ -58,7 +58,6 @@
 
 <script setup lang="ts">
 
-
 const userId = ref();
 const password = ref();
 
@@ -71,9 +70,11 @@ async function login(userId: string, password: string) {
         password: password
     }
 
-    await useApiPost(url, params).then(async (result) => {
-        await useAccessToken().setToken(result.data); // TODO 쿠키 저장 구현
+
+    await useApiPost(url, params).then(async (response) => {
+        await useSetCookie('accessToken', response.data);
     });
+
 
     // // GET 요청 예시
     // const { data: getData, error: getError } = useApiGet('https://api.example.com/items', { params: { userId: 'user1' } });

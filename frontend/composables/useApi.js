@@ -1,19 +1,3 @@
-import { useCookie } from '#app';
-
-export function useAccessToken() {
-    const accessToken = useCookie('accessToken');
-
-    async function setToken(token) {
-        accessToken.value = token;
-    }
-
-    async function getToken() {
-        return accessToken.value;
-    }
-
-    return {setToken, getToken};
-}
-
 /**
  * 객체를 쿼리 스트링으로 변환하는 함수
  */
@@ -35,15 +19,14 @@ async function useApiRequest(method, url, params = {}, headers = {}) {
     }
 
     // accessToken 체크
-    const accessToken = await useAccessToken().getToken();
-    console.log('accessToken : ', accessToken);
+    const accessToken = await useGetCookie('accessToken');
     if (!endpoint.includes('/login') && !accessToken) { // TODO url white list 정책 설정 필요 (공통 코드 호출 api)
         throw new Error('No access token available');
     }
     const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
     // useFetch 사용
-    const { data, pending, error, refresh } = await $fetch(endpoint, {
-        method,
+    const { data, code, message, exception } = await $fetch(endpoint, {
+        method: method,
         body: method !== 'GET' ? JSON.stringify(params) : undefined,
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +37,7 @@ async function useApiRequest(method, url, params = {}, headers = {}) {
 
     // pending은 로딩 상태, error는 에러 객체
     // refresh 함수를 제공하여 요청을 다시 할 수 있음
-    return { data, pending, error, refresh };
+    return { data, code, message, exception };
 }
 
 /**

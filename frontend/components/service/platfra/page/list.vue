@@ -18,14 +18,13 @@
 </template>
 <script setup lang="ts">
 
-// import {get} from '~/composables/api';
-//
 const contentList = ref();
-const params = {};
+const params = {
+    platfraId: useRoute().params.platfraId
+};
 
-useApiGet('/platfra/content', params).then(data => {
-    contentList.value = data;
-    console.log('data : ', data);
+useApiGet('/platfra/content', params).then(response => {
+    contentList.value = response.data;
 });
 
 
