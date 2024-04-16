@@ -1,11 +1,8 @@
 <template>
-    <div>
-        <!-- Your content -->
-        <service-main-dashboard/>
-    </div>
+
 </template>
 <script setup lang="ts">
-
+    navToName('main');
 </script>
 <style scoped>
 

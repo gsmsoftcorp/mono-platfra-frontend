@@ -1,11 +1,14 @@
+
+<template>
+    <div>
+        <service-main-dashboard/>
+    </div>
+</template>
 <script setup lang="ts">
 
 </script>
 
-<template>
-
-</template>
-
 <style scoped>
 
 </style>
+
