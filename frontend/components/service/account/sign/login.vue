@@ -58,6 +58,7 @@
 
 <script setup lang="ts">
 
+
 const userId = ref();
 const password = ref();
 
@@ -73,6 +74,7 @@ async function login(userId: string, password: string) {
 
     await useApiPost(url, params).then(async (response) => {
         await useSetCookie('accessToken', response.data);
+        await navToName('main');
     });
 
 

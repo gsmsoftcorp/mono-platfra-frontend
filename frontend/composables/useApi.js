@@ -3,6 +3,7 @@
  */
 async function objectToQueryString(obj) {
     return Object.keys(obj)
+        .filter(key => obj[key] !== null && obj[key] !== undefined && obj[key] !== '') // null, undefined, 빈 문자열 제외
         .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
         .join('&');
 }
@@ -15,14 +16,16 @@ async function useApiRequest(method, url, params = {}, headers = {}) {
     let endpoint = url.startsWith('/api') ? url : `/api${url.startsWith('/') ? '' : '/'}${url}`;
     if (method === 'GET' && Object.keys(params).length) {
         const queryString = await objectToQueryString(params);
-        endpoint = `${endpoint}?${queryString}`;
+        if (queryString) { // queryString이 비어있지 않은 경우에만 실행
+            endpoint = `${endpoint}?${queryString}`;
+        }
     }
 
     // accessToken 체크
     const accessToken = await useGetCookie('accessToken');
     if (!endpoint.includes('/login') && !accessToken) { // TODO url white list 정책 설정 필요 (공통 코드 호출 api)
         alert('로그인 해주세요.')
-        await navToName('account-sign', null);
+        await navToName('account-sign');
     }
     const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
     // useFetch 사용
