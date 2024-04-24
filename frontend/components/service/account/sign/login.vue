@@ -71,12 +71,10 @@ async function login(userId: string, password: string) {
         password: password
     }
 
-
     await useApiPost(url, params).then(async (response) => {
         await useSetCookie('accessToken', response.data);
         await navToName('main');
     });
-
 
     // // GET 요청 예시
     // const { data: getData, error: getError } = useApiGet('https://api.example.com/items', { params: { userId: 'user1' } });

@@ -55,8 +55,6 @@
     <!-- Separator -->
     <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
 
-    <service-platfra-page-list/>
-
 
 </template>
 <script setup lang="ts">
