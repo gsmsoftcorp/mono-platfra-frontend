@@ -153,6 +153,19 @@
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
 
+
+useApiGet('/platfra/content/', params).then(response => {
+    contentList.value = response.data;
+});
+
+
+
+
+
+
+
+
+
 const product = {
     name: 'Application UI Icon Pack',
     version: { name: '1.0', date: 'June 5, 2021', datetime: '2021-06-05' },

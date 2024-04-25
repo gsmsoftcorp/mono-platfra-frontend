@@ -72,7 +72,7 @@ async function login(userId: string, password: string) {
     }
 
     await useApiPost(url, params).then(async (response) => {
-        await useSetCookie('accessToken', response.data);
+        localStorage.setItem('accessToken', response.data);
         await navToName('main');
     });
 
