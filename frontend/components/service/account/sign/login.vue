@@ -88,7 +88,7 @@ async function login(userId: string, password: string) {
 
 const logout = () => {
     localStorage.removeItem('accessToken');
-    // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
+    navToName('account-sign');
 };
 
 </script>

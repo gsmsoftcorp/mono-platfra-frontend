@@ -268,7 +268,7 @@ const teams = [
 const userNavigation = [
     { name: 'Your profile', href: '#' },
     { name: 'Sign in', href: '/account/sign' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Sign out', href: '/account/sign/logout' },
 ]
 
 const sidebarOpen = ref(false)
@@ -284,6 +284,7 @@ const search = () => {
 
 const logout = () => {
     localStorage.removeItem('accessToken');
+    navToName('account-sign');
     // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
 };
 

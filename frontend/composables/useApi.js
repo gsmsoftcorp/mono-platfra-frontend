@@ -23,6 +23,10 @@ async function useApiRequest(method, url, params = {}, headers = {}) {
 
     // accessToken 체크
     const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken && !endpoint.includes('/login') && !endpoint.includes('/platfra/search')) { // TODO url white list 정책 설정 필요 (공통 코드 호출 api)
+        alert('로그인 해주세요.')
+        await navToName('account-sign');
+    }
     const bearerToken = accessToken ? `Bearer ${accessToken}` : null;
     // useFetch 사용
     const { data, code, message, exception } = await $fetch(endpoint, {

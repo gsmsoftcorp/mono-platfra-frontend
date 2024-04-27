@@ -45,7 +45,6 @@ const params = {
     searchValue: props.searchValue
 }
 
-console.log('props.searchValue : ', props.searchValue);
 const platfraList = ref();
 
 useApiGet('/platfra/search', params).then(response => {
