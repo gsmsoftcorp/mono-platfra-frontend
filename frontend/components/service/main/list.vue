@@ -1,39 +1,41 @@
 <template>
-    <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
-        <li v-for="platfra in platfraList" :key="platfra.platfraId" class="overflow-hidden rounded-xl border border-gray-200">
-            <nuxt-link :to="platfra.platfraId">
-                <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
-    <!--                <img :src="platfra.imageUrl" :alt="platfra.name" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" />-->
-                    <div class="text-sm font-medium leading-6 text-gray-900">
-                        {{ platfra.platfraId }} <!-- TODO 추후 사이트 명으로 변경-->
+    <div>
+        <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
+            <li v-for="platfra in platfraList" :key="platfra.platfraId" class="overflow-hidden rounded-xl border border-gray-200">
+                <nuxt-link :to="platfra.platfraId">
+                    <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
+        <!--                <img :src="platfra.imageUrl" :alt="platfra.name" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" />-->
+                        <div class="text-sm font-medium leading-6 text-gray-900">
+                            {{ platfra.platfraId }} <!-- TODO 추후 사이트 명으로 변경-->
+                        </div>
                     </div>
-                </div>
-                <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
-                    <div class="flex justify-between gap-x-4 py-3">
-                        <dt class="text-gray-500">제목</dt>
-                        <dd class="text-gray-700">
-                            {{ platfra.subject }}
-                        </dd>
-                    </div>
-                    <div class="flex justify-between gap-x-4 py-3">
-                        <dt class="text-gray-500">설명</dt>
-                        <dd class="flex items-start gap-x-2">
-                            <div class="font-medium text-gray-900">{{ platfra.description }}</div>
-                        </dd>
-                    </div>
-                    <div class="flex justify-between gap-x-4 py-3">
-                        <dt class="text-gray-500">소개</dt>
-                        <dd class="flex items-start gap-x-2">
-                            <div class="font-medium text-gray-900">{{ platfra.introduction }}</div>
-                        </dd>
-                    </div>
-                </dl>
-            </nuxt-link>
-        </li>
-    </ul>
+                    <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+                        <div class="flex justify-between gap-x-4 py-3">
+                            <dt class="text-gray-500">제목</dt>
+                            <dd class="text-gray-700">
+                                {{ platfra.subject }}
+                            </dd>
+                        </div>
+                        <div class="flex justify-between gap-x-4 py-3">
+                            <dt class="text-gray-500">설명</dt>
+                            <dd class="flex items-start gap-x-2">
+                                <div class="font-medium text-gray-900">{{ platfra.description }}</div>
+                            </dd>
+                        </div>
+                        <div class="flex justify-between gap-x-4 py-3">
+                            <dt class="text-gray-500">소개</dt>
+                            <dd class="flex items-start gap-x-2">
+                                <div class="font-medium text-gray-900">{{ platfra.introduction }}</div>
+                            </dd>
+                        </div>
+                    </dl>
+                </nuxt-link>
+            </li>
+        </ul>
+    </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 const props = defineProps({
     searchValue: {
@@ -45,7 +47,7 @@ const params = {
     searchValue: props.searchValue
 }
 
-const platfraList = ref();
+const platfraList = ref([]);
 
 useApiGet('/platfra/search', params).then(response => {
     platfraList.value = response.data;

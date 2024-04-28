@@ -10,12 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.19",
+    "@headlessui/vue": "^1.7.21",
     "@heroicons/vue": "^2.1.1",
+    "@nuxt/http": "^0.6.4",
     "@tailwindcss/forms": "^0.5.7",
     "http-proxy-middleware": "^2.0.6",
     "lodash": "^4.17.21",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.11.2",
     "tailwindcss": "^3.4.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

@@ -1,7 +1,7 @@
 <template>
     <ul role="list" class="p-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <li v-for="content in contentList" class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-left shadow">
-            <nuxt-link :to="platfraId + '/content/detail'">
+            <div @click="navToName('platfraId-content-contentSeq', { _contentSeq: content.contentSeq })">
                 <div class="flex flex-1 flex-col">
                     <img class="mx-auto flex-shrink-0" src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="" />
                     <h3 class="ml-3 mt-3 text-sm font-medium text-gray-900">{{ content.title }}</h3>
@@ -14,13 +14,14 @@
     <!--                    </dd>-->
                     </dl>
                 </div>
-            </nuxt-link>
+            </div>
         </li>
     </ul>
 </template>
 <script setup lang="ts">
+
     const platfraId = useRoute().params.platfraId;
-    const contentList = ref();
+    const contentList = ref({});
     const params = {
         platfraId: platfraId
     };

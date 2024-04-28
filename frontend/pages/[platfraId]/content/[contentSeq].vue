@@ -1,6 +1,5 @@
 <template>
     <div>
-        <service-platfra-home/>
         <service-platfra-content-detail/>
     </div>
 </template>

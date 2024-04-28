@@ -11,14 +11,14 @@
                 </div>
 
                 <!-- Product details -->
-                <div class="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
+                <div class="mx-auto mt-14 w-full max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
                     <div class="flex flex-col-reverse">
                         <div class="mt-4">
-                            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ product.name }}</h1>
+                            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ content.title }}</h1>
 
                             <h2 id="information-heading" class="sr-only">Product information</h2>
                             <p class="mt-2 text-sm text-gray-500">
-                                Version {{ product.version.name }} (Updated <time :datetime="product.version.datetime">{{ product.version.date }}</time
+                                (Updated <time :datetime="product.version.datetime">{{ product.version.date }}</time
                             >)
                             </p>
                         </div>
@@ -32,26 +32,10 @@
                         </div>
                     </div>
 
-                    <p class="mt-6 text-gray-500">{{ product.description }}</p>
+                    <p class="mt-6 text-gray-500">
+                        {{ content.content }}
+                    </p>
 
-                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-                        <button type="button" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Pay {{ product.price }}</button>
-                        <button type="button" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Preview</button>
-                    </div>
-
-                    <div class="mt-10 border-t border-gray-200 pt-10">
-                        <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
-                        <div class="prose prose-sm mt-4 text-gray-500">
-                            <ul role="list">
-                                <li v-for="highlight in product.highlights" :key="highlight">{{ highlight }}</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 border-t border-gray-200 pt-10">
-                        <h3 class="text-sm font-medium text-gray-900">License</h3>
-                        <p class="mt-4 text-sm text-gray-500">{{ license.summary }} <a :href="license.href" class="font-medium text-indigo-600 hover:text-indigo-500">Read full license</a></p>
-                    </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
                         <h3 class="text-sm font-medium text-gray-900">Share</h3>
@@ -149,22 +133,18 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
 
+const content = ref();
+const params = {
+    contentSeq: useRoute().params.contentSeq
+}
 
-useApiGet('/platfra/content/', params).then(response => {
-    contentList.value = response.data;
+useApiGet('/platfra/content/{contentSeq}', params).then(response => {
+    content.value = response.data.platfraContenDto;
 });
-
-
-
-
-
-
-
-
 
 const product = {
     name: 'Application UI Icon Pack',
@@ -186,9 +166,7 @@ const reviews = {
         {
             id: 1,
             rating: 5,
-            content: `
-        <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-      `,
+            content: `<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>`,
             date: 'July 16, 2021',
             datetime: '2021-07-16',
             author: 'Emily Selman',
@@ -198,9 +176,7 @@ const reviews = {
         {
             id: 2,
             rating: 5,
-            content: `
-        <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
-      `,
+            content: `<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box, so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>`,
             date: 'July 12, 2021',
             datetime: '2021-07-12',
             author: 'Hector Gibbons',
