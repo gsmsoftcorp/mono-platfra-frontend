@@ -137,13 +137,13 @@
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
 
-const content = ref();
+const content = ref({});
 const params = {
     contentSeq: useRoute().params.contentSeq
 }
 
 useApiGet('/platfra/content/{contentSeq}', params).then(response => {
-    content.value = response.data.platfraContenDto;
+    content.value = response.data;
 });
 
 const product = {

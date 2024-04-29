@@ -1,4 +1,5 @@
-import { useFetch } from 'nuxt/app';
+import {useFetch, type UseFetchOptions} from '#app';
+import type {KeysOf} from "#app/composables/asyncData";
 
 interface Params {
     [key: string]: any;
@@ -9,13 +10,13 @@ interface Headers {
 }
 
 // FetchOptions 타입 정의
-interface FetchOptions extends RequestInit {
-    method: string;
+interface FetchOptions extends Omit<UseFetchOptions<any>, 'method'> {
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE'; // 메서드를 명확한 타입으로 지정
     body?: string;
     headers: HeadersInit;
 }
 
-async function useApiRequest(method: string, url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
+async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
     let endpoint = url.startsWith('/api') ? url : `/api${url.startsWith('/') ? '' : '/'}${url}`;
     // 경로 변수 처리
     Object.keys(params).forEach(key => {
@@ -40,12 +41,13 @@ async function useApiRequest(method: string, url: string, params: Params = {}, h
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken && !endpoint.includes('/login') && !endpoint.includes('/platfra/search')) {
         alert('로그인 해주세요.' + endpoint);
+        await navToName('account-sign');
     }
     const bearerToken = accessToken ? `Bearer ${accessToken}` : '';
 
     // useFetch 사용
     const fetchOptions: FetchOptions = {
-        method: method,
+        method: method as 'GET' | 'POST' | 'PUT' | 'DELETE',
         body: method !== 'GET' ? JSON.stringify(params) : undefined,
         headers: new Headers({
             'Content-Type': 'application/json',
@@ -54,8 +56,35 @@ async function useApiRequest(method: string, url: string, params: Params = {}, h
         }),
     };
 
-    const { data } = await useFetch(endpoint, fetchOptions as any);
+    const { data } = await useFetch(endpoint, fetchOptions);
     return data.value;
 }
 
-// 이하 함수는 동일하게 유지
+
+/**
+ * GET 요청을 위한 함수
+ */
+export async function useApiGet(url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
+    return await useApiRequest('GET', url, params, headers);
+}
+
+/**
+ * POST 요청을 위한 함수
+ */
+export async function useApiPost(url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
+    return await useApiRequest('POST', url, params, headers);
+}
+
+/**
+ * PUT 요청을 위한 함수
+ */
+export async function useApiPut(url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
+    return await useApiRequest('PUT', url, params, headers);
+}
+
+/**
+ * DELETE 요청을 위한 함수
+ */
+export async function useApiDelete(url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
+    return await useApiRequest('DELETE', url, params, headers);
+}
