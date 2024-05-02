@@ -39,11 +39,12 @@ async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: str
 
     // accessToken 체크
     const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken && !endpoint.includes('/login') && !endpoint.includes('/platfra/search')) {
+    const isWhite = endpoint.includes('/login') || endpoint.includes('/platfra/search');
+    if (!accessToken && !isWhite) {
         alert('로그인 해주세요.' + endpoint);
         await navToName('account-sign');
     }
-    const bearerToken = accessToken ? `Bearer ${accessToken}` : '';
+    const bearerToken = accessToken && !isWhite ? `Bearer ${accessToken}` : '';
 
     // useFetch 사용
     const fetchOptions: FetchOptions = {
@@ -57,6 +58,10 @@ async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: str
     };
 
     const { data } = await useFetch(endpoint, fetchOptions);
+    if(data.value.code == 'AR001') {
+        alert('로그인 해주세요.');
+        await navToName('account-sign');
+    }
     return data.value;
 }
 
