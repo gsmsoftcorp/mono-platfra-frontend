@@ -217,9 +217,13 @@
             </div>
         </div>
 
-        <!-- Separator -->
-        <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
-
+        <div class="bg-white">
+            <nav class="flex items-center justify-center p-6 lg:px-8" aria-label="Global">
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <nuxt-link v-for="platfraBoard in platfraBoardList" :key="platfraBoard.platfraBoardSeq" :to="'/platfraId/board/list'" class="text-sm font-semibold leading-6 text-gray-900">{{ platfraBoard.subject }}</nuxt-link>
+                </div>
+            </nav>
+        </div>
         <!-- Your content -->
         <slot />
     </div>
@@ -273,7 +277,7 @@ const userNavigation = [
 
 const sidebarOpen = ref(false)
 
-const searchValue = ref();
+const searchValue = ref([]);
 const search = () => {
     const params = {
         searchValue: searchValue.value
@@ -288,6 +292,17 @@ const logout = () => {
     // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
 };
 
+
+const params = {
+    platfraId: useRoute().params.platfraId
+}
+
+const platfraBoardList = ref([]);
+
+useApiGet('platfra/board', params).then(response => {
+    console.log('response.data : ', response.data);
+    platfraBoardList.value = response.data
+})
 
 
 
@@ -320,6 +335,14 @@ const tabs = [
 ]
 
 
+const navigation2 = [
+    { name: 'Product', href: '#' },
+    { name: 'Features', href: '#' },
+    { name: 'Marketplace', href: '#' },
+    { name: 'Company', href: '#' },
+]
+
+const mobileMenuOpen = ref(false)
 
 
 

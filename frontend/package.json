@@ -12,17 +12,16 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.21",
     "@heroicons/vue": "^2.1.1",
-    "@nuxt/http": "^0.6.4",
     "@tailwindcss/forms": "^0.5.7",
     "http-proxy-middleware": "^2.0.6",
     "lodash": "^4.17.21",
-    "nuxt": "^3.11.2",
     "tailwindcss": "^3.4.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "nuxt": "^3.11.2"
   }
 }
