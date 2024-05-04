@@ -1,7 +1,6 @@
 <template>
     <div>
-        <!-- TODO home(메인 페이지) 구성 -->
-        <service-platfra-content-list/>
+        <service-platfra-home />
     </div>
 </template>
 <script setup lang="ts">

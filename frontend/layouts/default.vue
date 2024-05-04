@@ -217,13 +217,6 @@
             </div>
         </div>
 
-        <div class="bg-white">
-            <nav class="flex items-center justify-center p-6 lg:px-8" aria-label="Global">
-                <div class="hidden lg:flex lg:gap-x-12">
-                    <nuxt-link v-for="platfraBoard in platfraBoardList" :key="platfraBoard.platfraBoardSeq" :to="'/platfraId/board/list'" class="text-sm font-semibold leading-6 text-gray-900">{{ platfraBoard.subject }}</nuxt-link>
-                </div>
-            </nav>
-        </div>
         <!-- Your content -->
         <slot />
     </div>
@@ -256,6 +249,27 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/20/solid'
 
+const sidebarOpen = ref(false)
+
+const searchValue = ref([]);
+const search = () => {
+    const params = {
+        searchValue: searchValue.value
+    }
+    navToName('main-list', params);
+}
+
+const logout = () => {
+    localStorage.removeItem('accessToken');
+    navToName('account-sign');
+    // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
+};
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
     { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -275,38 +289,6 @@ const userNavigation = [
     { name: 'Sign out', href: '/account/sign/logout' },
 ]
 
-const sidebarOpen = ref(false)
-
-const searchValue = ref([]);
-const search = () => {
-    const params = {
-        searchValue: searchValue.value
-    }
-    navToName('main-list', params);
-}
-
-
-const logout = () => {
-    localStorage.removeItem('accessToken');
-    navToName('account-sign');
-    // TODO 로그인 페이지로 리다이렉트 등 추가적인 로그아웃 처리
-};
-
-
-const params = {
-    platfraId: useRoute().params.platfraId
-}
-
-const platfraBoardList = ref([]);
-
-useApiGet('platfra/board', params).then(response => {
-    console.log('response.data : ', response.data);
-    platfraBoardList.value = response.data
-})
-
-
-
-// platfra 영역
 
 const profile = {
     name: 'Ricardo Cooper',
@@ -333,17 +315,5 @@ const tabs = [
     { name: 'Offer', href: '#', current: false },
     { name: 'Disqualified', href: '#', current: false },
 ]
-
-
-const navigation2 = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
-]
-
-const mobileMenuOpen = ref(false)
-
-
 
 </script>

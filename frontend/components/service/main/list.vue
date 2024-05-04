@@ -2,7 +2,7 @@
     <div>
         <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
             <li v-for="platfra in platfraList" :key="platfra.platfraId" class="overflow-hidden rounded-xl border border-gray-200">
-                <nuxt-link :to="platfra.platfraId">
+                <div class="cursor-pointer" @click="navToName('platfraId', { _platfraId: platfra.platfraId })">
                     <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
         <!--                <img :src="platfra.imageUrl" :alt="platfra.name" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" />-->
                         <div class="text-sm font-medium leading-6 text-gray-900">
@@ -29,7 +29,7 @@
                             </dd>
                         </div>
                     </dl>
-                </nuxt-link>
+                </div>
             </li>
         </ul>
     </div>

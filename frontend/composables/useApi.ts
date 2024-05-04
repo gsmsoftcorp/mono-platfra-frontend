@@ -1,5 +1,4 @@
 import {useFetch, type UseFetchOptions} from '#app';
-import type {KeysOf} from "#app/composables/asyncData";
 
 interface Params {
     [key: string]: any;
@@ -39,7 +38,7 @@ async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: str
 
     // accessToken 체크
     const accessToken = localStorage.getItem('accessToken');
-    const isWhite = endpoint.includes('/login') || endpoint.includes('/platfra/search');
+    const isWhite = endpoint.includes('/login') || endpoint.includes('/signup') || endpoint.includes('/platfra');
     if (!accessToken && !isWhite) {
         alert('로그인 해주세요.' + endpoint);
         await navToName('account-sign');

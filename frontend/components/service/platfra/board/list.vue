@@ -1,110 +1,54 @@
 <template>
-<!--    <ul role="list" class="p-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">-->
-<!--        <li v-for="content in contentList" class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-left shadow">-->
-<!--            <nuxt-link :to="">-->
-<!--                <div class="flex flex-1 flex-col">-->
-<!--                    <img class="mx-auto flex-shrink-0" src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="" />-->
-<!--                    <h3 class="ml-3 mt-3 text-sm font-medium text-gray-900">{{ content.title }}</h3>-->
-<!--                    <dl class="m-3 flex flex-grow flex-col justify-between">-->
-<!--                        <dt class="sr-only">Title</dt>-->
-<!--                        <dd class="text-sm text-gray-500">{{ content.content }}</dd>-->
-<!--                        <dt class="sr-only">Role</dt>-->
-<!--    &lt;!&ndash;                    <dd class="mt-3">&ndash;&gt;-->
-<!--    &lt;!&ndash;                        <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ content.role }}</span>&ndash;&gt;-->
-<!--    &lt;!&ndash;                    </dd>&ndash;&gt;-->
-<!--                    </dl>-->
-<!--                </div>-->
-<!--            </nuxt-link>-->
-<!--        </li>-->
-<!--    </ul>-->
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-base font-semibold leading-6 text-gray-900">게시판 타이틀</h1>
+                <p class="mt-2 text-sm text-gray-700">게시판 설명</p>
+            </div>
+            <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
+            </div>
+        </div>
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-300">
+                            <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                            <tr v-for="person in people" :key="person.email">
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ person.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.title }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.email }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.role }}</td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                                    >Edit<span class="sr-only">, {{ person.name }}</span></a
+                                    >
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
-<script setup lang="ts">
 
-// const contentList = ref();
-// const params = {
-//     platfraId: useRoute().params.platfraId
-// };
-//
-// useApiGet('/platfra/content', params).then(response => {
-//     contentList.value = response.data;
-// });
-
-
-// const contentList = [
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Paradigm Representative',
-//         role: 'Admin',
-//         email: 'janecooper@example.com',
-//         telephone: '+1-202-555-0170',
-//         imageUrl:
-//             'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-//     },
-// ]
+<script setup>
+const people = [
+    { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
+    // More people...
+]
 </script>
-<style scoped>
-
-</style>
