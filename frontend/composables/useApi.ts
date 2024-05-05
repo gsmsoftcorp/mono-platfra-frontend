@@ -13,6 +13,7 @@ interface FetchOptions extends Omit<UseFetchOptions<any>, 'method'> {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'; // 메서드를 명확한 타입으로 지정
     body?: string;
     headers: HeadersInit;
+    fetchOnServer: boolean;
 }
 
 async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, params: Params = {}, headers: Headers = {}): Promise<any> {
@@ -54,10 +55,11 @@ async function useApiRequest(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: str
             Authorization: bearerToken,
             ...headers,
         }),
+        fetchOnServer: true
     };
 
     const { data } = await useFetch(endpoint, fetchOptions);
-    if(data.value.code == 'AR001') {
+    if(data.value.code === 'AR001') {
         alert('로그인 해주세요.');
         await navToName('account-sign');
     }
