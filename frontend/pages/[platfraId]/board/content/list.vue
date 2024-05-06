@@ -1,7 +1,6 @@
-
 <template>
     <div>
-        <service-platfra-board-list />
+        <service-platfra-board-content-list />
     </div>
 </template>
 

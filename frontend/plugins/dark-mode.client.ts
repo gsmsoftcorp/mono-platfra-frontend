@@ -1,8 +1,8 @@
-// plugins/dark-mode.client.js
-export default defineNuxtPlugin(nuxtApp => {
+// plugins/dark-mode.client.ts
+export default defineNuxtPlugin((nuxtApp) => {
     const toggleDarkMode = () => {
-        const hour = new Date().getHours();
-        const isDarkMode = hour >= 23 || hour < 7; // 오후 11시부터 오전 7시 사이를 체크
+        const hour: number = new Date().getHours();
+        const isDarkMode: boolean = hour >= 23 || hour < 7; // 오후 11시부터 오전 7시 사이를 체크
 
         if (isDarkMode) {
             document.documentElement.classList.add('dark');
