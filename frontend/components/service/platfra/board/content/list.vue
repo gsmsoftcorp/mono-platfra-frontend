@@ -16,7 +16,11 @@
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 <tr v-for="boardContent in boardContentList" :key="boardContent.boardContentSeq">
                                     <td class="p-4 text-gray-900 text-center">{{ boardContent.contentNo }}</td>
-                                    <td class="p-4 text-gray-500 text-left whitespace-nowrap">{{ boardContent.title }}</td>
+                                    <td class="p-4 text-gray-500 text-left whitespace-nowrap cursor-pointer"
+                                        @click="navToName('platfraId-board-platfraBoardSeq-content-platfraBoardContentSeq', { _platfraBoardContentSeq: boardContent.contentSeq })"
+                                    >
+                                        {{ boardContent.title }}
+                                    </td>
 <!--                                    <td class="p-4 text-gray-500 text-left whitespace-nowrap">{{ boardContent.content }}</td>-->
                                     <td class="p-4 text-gray-900 text-center">{{ boardContent.view }}</td>
                                 </tr>
