@@ -65,7 +65,7 @@ const password = ref();
 // login 함수 구현
 async function login(userId: string, password: string) {
     // 로그인 API의 URL
-    const url = '/login';
+    const url = '/account/login';
     const params = {
         userId: userId,
         password: password
