@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO home(메인 페이지) 구성 -->
     <div class="bg-white">
         <nav class="flex items-center justify-center p-6 lg:px-8" aria-label="Global">
             <div class="hidden lg:flex lg:gap-x-12">
@@ -28,16 +27,4 @@ if(useRoute().params.platfraId) {
     })
 }
 
-
-
-
-
-
-
-
-
-const people = [
-    { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
-    // More people...
-]
 </script>
