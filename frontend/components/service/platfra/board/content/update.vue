@@ -6,7 +6,9 @@
             <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 xl:grid xl:max-w-5xl xl:grid-cols-3">
               <div class="xl:col-span-3 xl:border-gray-250 xl:pr-8">
                 <div class="border-b border-gray-900/10 pb-12">
-                  <h2 class="text-base font-semibold leading-7 text-gray-900">{{ platfraBoardUpdate.title }}</h2>
+                  <h2 class="text-base font-semibold leading-7 text-gray-900">
+                      <input v-model="platfraBoardUpdate.title">
+                  </h2>
 
                   <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -58,30 +60,30 @@ import {
 
 
 const params = {
-  platfraBoardContentSeq: useRoute().query.contentSeq
+    platfraBoardContentSeq: useRoute().query.contentSeq
 }
 
 const platfraBoardUpdate = ref({});
 
-if(useRoute().params.platfraId) {
-  console.log('params >> ', params);
-  useApiGet('/platfra/board/content/{platfraBoardContentSeq}', params).then(response => {
-    console.log('response.data : ', response.data);
-    platfraBoardUpdate.value = response.data
-  })
+if (useRoute().params.platfraId) {
+    console.log('params >> ', params);
+    useApiGet('/platfra/board/content/{platfraBoardContentSeq}', params).then(response => {
+        console.log('response.data : ', response.data);
+        platfraBoardUpdate.value = response.data
+    })
 }
 
-function update(){
+function update() {
+    const params = {
+        title: platfraBoardUpdate.value.title,
+        content: platfraBoardUpdate.value.content,
+        contentSeq: platfraBoardUpdate.value.contentSeq
+    };
 
-  const params = {
-      content   : platfraBoardUpdate.value.content
-    , contentSeq: platfraBoardUpdate.value.contentSeq
-  };
-
-  useApiPut('/platfra/board/content', params).then(response => {
-    console.log('response.data : ', response.data);
-    //platfraBoardUpdate.value = response.data
-  })
+    useApiPut('/platfra/board/content', params).then(response => {
+        console.log('response.data : ', response.data);
+        //platfraBoardUpdate.value = response.data
+    })
 }
 
 </script>
