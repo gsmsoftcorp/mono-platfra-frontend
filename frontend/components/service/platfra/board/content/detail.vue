@@ -16,7 +16,7 @@
                                                 </p>
                                             </div>
                                             <div class="mt-4 flex space-x-3 md:mt-0">
-                                                <button type="button" class="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                <button type="button" @click="navToName('platfraId-board-platfraBoardSeq-content-update', { contentSeq: platfraBoardContent.contentSeq })" class="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                                     <PencilIcon class="-ml-0.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                                                     Edit
                                                 </button>
