@@ -42,7 +42,7 @@
                     <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                         <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
                             <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                <nuxt-link :to="item.href" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">{{ item.name }}</nuxt-link>
+                                <div @click="navToName(item.href)" :class="[active ? 'bg-gray-50' : '', 'cursor-pointer block px-3 py-1 text-sm leading-6 text-gray-900']">{{ item.name }}</div>
                             </MenuItem>
                         </MenuItems>
                     </transition>
@@ -56,9 +56,12 @@
 
 import {ref, watch} from "vue";
 import {useSidebarStore} from '~/stores/useSidebarStore';
+import {Menu, MenuButton, MenuItem, MenuItems, provideUseId} from "@headlessui/vue";
 import {Bars3Icon, BellIcon} from "@heroicons/vue/24/outline";
 import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
-import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/vue";
+import {navToName} from "../../../composables/useRouters";
+
+provideUseId(() => useId())
 
 //sidebar 제어
 const sidebarStore = useSidebarStore();
@@ -81,7 +84,7 @@ const search = () => {
 
 const userNavigation = [
     { name: 'Your profile', href: '#' },
-    { name: 'Sign in', href: '/account/sign' },
-    { name: 'Sign out', href: '/account/sign/logout' },
+    { name: 'Sign in', href: 'account-sign' },
+    { name: 'Sign out', href: 'account-sign-logout' },
 ]
 </script>
