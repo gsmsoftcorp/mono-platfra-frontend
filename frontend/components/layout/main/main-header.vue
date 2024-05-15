@@ -59,7 +59,6 @@ import {useSidebarStore} from '~/stores/useSidebarStore';
 import {Menu, MenuButton, MenuItem, MenuItems, provideUseId} from "@headlessui/vue";
 import {Bars3Icon, BellIcon} from "@heroicons/vue/24/outline";
 import {ChevronDownIcon, MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
-import {navToName} from "../../../composables/useRouters";
 
 provideUseId(() => useId())
 
