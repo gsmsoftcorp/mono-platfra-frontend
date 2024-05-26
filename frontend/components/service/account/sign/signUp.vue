@@ -49,16 +49,26 @@
         <div class="sm:col-span-4">
           <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">phone</label>
           <div class="mt-2">
-            <input v-model="phone" type="text" name="phone" id="phone" autocomplete="010" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input v-model="phone" type="text" name="phone" id="phone" autocomplete="010" placeholder="01011112222" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
         <div class="sm:col-span-3">
           <label for="gender" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
           <div class="mt-2">
-            <select v-model="gender" id="gender" name="gender" autocomplete="m" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-              <option>Man</option>
-              <option>Woman</option>
+            <select v-model="gender" id="gender" name="gender" autocomplete="M" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option value="M">Man</option>
+              <option value="W">Woman</option>
             </select>
+          </div>
+        </div>
+        <div class="sm:col-span-4">
+          <label for="mmmm" class="block text-sm font-medium leading-6 text-gray-900">birthdate</label>
+          <div class="mt-2">
+            <div class="flex justify-between rounded-md ring-inset sm:max-w-md">
+              <input v-model="yyyy" type="text" name="yyyy" id="yyyy" placeholder="YYYY" autocomplete="1900" maxlength="4" class="block w-2/5 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+              <input v-model="mmmm" type="text" name="mmmm" id="mmmm" placeholder="MM" autocomplete="01" maxlength="2" class="block w-1/5 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+              <input v-model="dddd" type="text" name="dddd" id="dddd" placeholder="DD" autocomplete="01" maxlength="2" class="block w-1/5 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            </div>
           </div>
         </div>
       </div>
@@ -66,7 +76,7 @@
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button @click="signUp(userId, password, email, username, phone, gender)" type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
+    <button @click="signUp(userId, password, email, username, phone, gender, yyyy, mmmm, dddd)" type="button" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign Up</button>
   </div>
 </template>
 
@@ -79,9 +89,15 @@ const email = ref();
 const username = ref();
 const phone = ref();
 const gender = ref();
+const yyyy = ref();
+const mmmm = ref();
+const dddd = ref();
 
 // 회원가입 함수 구현
-async function signUp(userId: string, password: string, email: string, username: string, phone: number, gender: number) {
+async function signUp(userId: string, password: string, email: string, username: string, phone: number, gender: number, yyyy: string, mmmm: string, dddd: string) {
+
+    let birthdate = yyyy+"-"+mmmm+"-"+dddd;
+
     // 회원가입 API의 URL
     const url = '/account/signup';
     const params = {
@@ -90,7 +106,8 @@ async function signUp(userId: string, password: string, email: string, username:
         email: email,
         username: username,
         phone: phone,
-        gender: gender
+        gender: gender,
+        birthdate : birthdate
     }
 
     await useApiPost(url, params).then(async (response) => {
@@ -99,7 +116,7 @@ async function signUp(userId: string, password: string, email: string, username:
     });
 
     // // GET 요청 예시
-    // const { data: getData, error: getError } = useApiGet('https://api.example.com/items', { params: { userId: 'user1' } });
+    // const { data: getDat a, error: getError } = useApiGet('https://api.example.com/items', { params: { userId: 'user1' } });
     // // POST 요청 예시
     // const { data: postData, error: postError } = useApiPost('https://api.example.com/items', { body: { name: 'New Item', price: 100 } });
     // // PUT 요청 예시
